@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1 user-scalable=no, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>简易计算机</title>
+	<link rel="stylesheet" href="./styles/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
+    <meta content='#171825' name='theme-color' />
+    <meta name="keywords"
+        content="简易计算机">
+    <meta property="og:title" content="简易计算机" />
+    <meta property="og:description"
+        content="简易计算机" />
+    <meta property="og:image"
+        content="./images/meta.jpg" />
+    <meta property="og:url" content="https://wong0516.my/" />
+    <meta property="og:site_name" content="简易计算机" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="fb:admins" content="245221532650178" />
+    <meta property="og:type" content="website" />
+    <meta property="description"
+        content="简易计算机" />
+    <meta property="image"
+        content="./images/meta.jpg" />
+    <meta itemprop="name" content="简易计算机" />
+    <meta itemprop="description"
+        content="简易计算机" />
+    <meta itemprop="image"
+        content="。/images/meta.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="简易计算机" />
+    <meta property="twitter:description"
+        content="简易计算机" />
+    <meta property="twitter:image:src"
+        content="./images/meta.jpg" />
+	<meta property="twitter:image" content="简易计算机" />
+	<link rel='icon' type='image/x-icon' href='./images/favicon.ico' />
+</head>
+<body>
+    
+	<div class="container">
+        <h1>
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-mode" />
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <a class="tittle" onclick="location.reload();">简易计算机</a>
+            <hi-img id="historybutton" src="./images/history.png">	
+        </h1>
+        <div class="calculator">
+            <input type="text" name="screen" id="answer" readonly>
+            <table>
+                <tr>
+                    <td><button value="(">(</button></td>
+                    <td><button value=")">)</button></td>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                <button value="C" onclick="clearAll()">C</button>
+                            </div>
+                            <div class="col">
+                                <button value="CE" onclick="deleteLastEntry()">CE</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td><button value="%">%</button></td>
+                </tr>
+                <tr>
+                    <td><button value="7">7</button></td>
+                    <td><button value="8">8</button></td>
+                    <td><button value="9">9</button></td>
+                    <td><button value="*">X</button></td>
+                </tr>
+                <tr>
+                    <td><button value="4">4</button></td>
+                    <td><button value="5">5</button></td>
+                    <td><button value="6">6</button></td>
+                    <td><button value="-">-</button></td>
+                </tr>
+                <tr>
+                    <td><button value="1">1</button></td>
+                    <td><button value="2">2</button></td>
+                    <td><button value="3">3</button></td>
+                    <td><button value="+">+</button></td>
+                </tr>
+                <tr>
+                    <td><button value="0">0</button></td>
+                    <td><button value="." style="font-weight: bold;">.</button></td>
+                    <td><button value="/">/</button></td>
+                    <td><button value="=" style="background-color: #25db72; font-weight: bold; color: #ecf0f1;">=</button></td>
+                </tr>
+            </table>
+        </div>
+	</div>
+    <div id="bar1" class = "bars"></div>
+    <div id="bar2" class = "bars"></div>
+    <div id="history"></div>
+    <div id="turn">
+        请转动你的设备
+    </div>
+</body>
+
+<script src="./scripts/hist.js"></script>
+<script src="./scripts/calc.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70447982-5"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-70447982-5');
+</script>
+<script>
+	const toggleMode = document.getElementById('toggle-mode');
+	const container = document.querySelector('.container');
+
+	toggleMode.addEventListener('change', function() {
+		container.classList.toggle('dark-mode');
+	});
+
+    document.addEventListener('keydown', function (event) {
+        handleKeyPress(event.key);
+    });
+
+    function handleKeyPress(key) {
+        if (key === 'Enter') {
+            handleButtonPress('=');
+        }
+        if (key === 'Delete' || key === 'Backspace') {
+            handleButtonPress('CE');
+        }
+        if (/[0-9]/.test(key)) {
+            handleButtonPress(key);
+        }
+        if (/[\.\+\-\*\/%()]/.test(key)) {
+            handleButtonPress(key);
+        }
+    }
+    function handleButtonPress(value) {
+        const button = document.querySelector(`button[value="${value}"]`);
+
+        button.classList.add('clicked')
+        button.click();
+        
+        setTimeout(() => {
+            button.classList.remove('clicked')
+        }, 70)
+    }
+</script>
+</html>
